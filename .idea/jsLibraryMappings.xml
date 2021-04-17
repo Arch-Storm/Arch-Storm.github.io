@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{@types/gsap, gsap, jquery, typed.js}" />
-    <excludedPredefinedLibrary name="Arch-Storm.github.io/node_modules" />
+    <file url="PROJECT" libraries="{gsap, jquery}" />
   </component>
 </project>
