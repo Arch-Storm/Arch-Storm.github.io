@@ -1,73 +1,102 @@
 :root {
     --bg: #1b1b2a;
+    --bg_hc: #2a2a51;
     --fg: #e4e4d4;
-}
-
-::-webkit-scrollbar{
-    width:6px
-}
-::-webkit-scrollbar-track{
-    background:transparent;
-}
-::-webkit-scrollbar-thumb{
-    background: var(--bg);
-}
-::-webkit-scrollbar-thumb:hover{
-    background:#cc2626
-}
-::-moz-selection{
-    background-color:#cc2626;
-    color:#000
-}
-::selection{
-    background-color:#cc2626;
-    color:#000
+    --fg_hc: #fafaef;
 }
 
 html {
     margin: 0;
     box-sizing: border-box;
     padding: 0;
-    background-color: var(--fg);
+    background-color: var(--bg);
     scroll-snap-type: y mandatory;
+    overflow-x: hidden;
 }
 
 *, *:before, *:after {
     box-sizing: inherit;
     margin: inherit;
     padding: inherit;
+    cursor: none;
 }
 
 body {
-    background-color: var(--fg);
+    background-color: var(--bg);
 }
 
-.logo_mask {
+.cursor {
     position: fixed;
-    z-index: 1;
-    width: 5%;
-    height: 100%;
-    background-color: var(--fg);
+    top: 0;
+    left: 0;
+    z-index: 100;
+    contain: layout style size;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    &:before {
+        content: "";
+        position: absolute;
+        top: -24px;
+        left: -24px;
+        display: block;
+        width: 48px;
+        height: 48px;
+        transform: scale(0.2);
+        background: var(--fg);
+        border-radius: 100%;
+    }
+}
+
+.follow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    contain: layout style size;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    &:before{
+        content: "";
+        position: absolute;
+        top: -24px;
+        left: -24px;
+        display: block;
+        width: 48px;
+        height: 48px;
+        transform: scale(0.9);
+        background: var(--fg);
+        opacity: .5;
+        border-radius: 100%;
+        mask: radial-gradient(transparent 17px, #000 18px);
+    }
 }
 
 .background {
-    position: relative;
-    left: 5%;
-    width: 80%;
-    background-color: var(--bg);
-    scroll-snap-align: start;
-    height: 100vh;
+    position: fixed;
+    left: 0;
+    z-index: 2;
+    width: 10%;
+    background-color: var(--fg);
+    height: 100%;
+    &-right {
+        @extend .background;
+        left: auto;
+        right: 0;
+        width: 10%;
+    }
 }
 
 .img_container {
-    position: absolute;
+    position: fixed;
+    background: transparent;
     width: 100%; height: 100%;
+    z-index: 1;
 }
 
 .profile_img {
-    position: absolute;
-    bottom: 30vh; left: -100vh;
-    transform: translateX(0%) translateY(60%) rotateY(0) rotateX(0) rotate(0) scale(1);
+    position: fixed;
+    bottom: 0; left: -600px;
+    transform: translateX(0%) translateY(0%) rotateY(5deg) rotateX(35deg) rotate(-10deg) scale(1);
 }
 
 .social {
@@ -75,6 +104,7 @@ body {
     position: fixed;
     top: 50%;
     left: 105%;
+    z-index: 3;
     transform: translateY(-50%);
     mix-blend-mode: difference;
 }
@@ -86,23 +116,47 @@ body {
     mix-blend-mode: difference;
 }
 
-.nav_logo {
+.nav_link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: fixed;
-    width: 11vw;
-    top: 50%;
-    left: -11vw;
-    transform: translateY(-50%);
-    mix-blend-mode: difference;
+    z-index: 3;
+    width: 640px;
+    height: 640px;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.underline {
+    position: absolute;
+    bottom: 4%; left: 0;
+    background-color: var(--bg_hc);
+    width: 0; height: 3px;
+}
+
+.overline {
+    position: absolute;
+    top: 4%; left: 0;
+    background-color: var(--bg_hc);
+    width: 0; height: 3px;
+}
+
+.nav_logo {
+    position: absolute;
+    fill: var(--fg);
 }
 
 .description {
-    position: relative;
+    position: fixed;
     z-index: 1;
-    top: 55%;
-    margin-left: 60%;
-    color: #E4E4D4;
+    top: 65%; left: 50%;
+    width: 50vw; height: 30vh;
+    transform: translate(-50%, -50%);
+    color: var(--fg);
     font-family: 'Playfair Display', serif;
     font-weight: 500;
-    font-size: 3.5em;
+    font-size: 8em;
     text-align: left;
 }

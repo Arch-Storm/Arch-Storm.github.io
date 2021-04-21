@@ -13,5 +13,7 @@
     <orderEntry type="library" name="gsap" level="application" />
     <orderEntry type="library" name="@types/gsap" level="application" />
     <orderEntry type="library" name="gsap" level="application" />
+    <orderEntry type="library" name="pixi.js" level="application" />
+    <orderEntry type="library" name="warpjs" level="application" />
   </component>
 </module>
