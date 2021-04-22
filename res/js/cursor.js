@@ -1,3 +1,5 @@
+import init_cursor from './index.js'
+
 // Gets the mouse position
 const getMousePos = e => {
     return {
@@ -16,7 +18,6 @@ let _amt = 0;
 export default class Cursor {
     constructor(el) {
         this.Cursor = el;
-        this.Cursor.style.opacity = 0;
 
         if (this.Cursor.classList.contains("cursor")) {
             _amt = .5;
@@ -33,11 +34,7 @@ export default class Cursor {
             this.cursorConfigs.x.previous = this.cursorConfigs.x.current = mouse.x;
             this.cursorConfigs.y.previous = this.cursorConfigs.y.current = mouse.y;
 
-            // Set cursor opacity to 1 when hovered on the screen
-            gsap.to(this.Cursor, {
-                duration: 1, ease: 'Power3.easeInOut',
-                opacity: 1,
-            })
+            init_cursor();
 
             //    requestAnimationFrame
             requestAnimationFrame(() => this.render())

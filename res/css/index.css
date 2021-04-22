@@ -42,7 +42,7 @@ body {
   display: block;
   width: 48px;
   height: 48px;
-  transform: scale(0.2);
+  transform: scale(0);
   background: var(--fg);
   border-radius: 100%;
 }
@@ -64,11 +64,11 @@ body {
   display: block;
   width: 48px;
   height: 48px;
-  transform: scale(0.9);
+  transform: scale(0);
   background: var(--fg);
-  opacity: 0.5;
   border-radius: 100%;
   mask: radial-gradient(transparent 17px, #000 18px);
+  -webkit-mask: -webkit-radial-gradient(transparent 17px, #000 18px);
 }
 
 .background, .background-right {
@@ -103,18 +103,27 @@ body {
 .social {
   visibility: hidden;
   position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   top: 50%;
   left: 105%;
   z-index: 3;
   transform: translateY(-50%);
-  mix-blend-mode: difference;
+  filter: saturate(1722%) hue-rotate(201deg) brightness(91%) contrast(90%);
+}
+
+.social-entry {
+  display: block;
+  position: relative;
+  max-height: 3vw;
 }
 
 .social-icon {
-  width: 2.1vw;
-  height: 2.1vw;
-  filter: invert(1);
-  mix-blend-mode: difference;
+  width: 2vw;
+  height: 3vw;
+  filter: invert(7%) sepia(17%);
 }
 
 .nav_link {
@@ -131,7 +140,7 @@ body {
   opacity: 0;
 }
 
-.underline {
+.underline, .underline-social {
   position: absolute;
   bottom: 4%;
   left: 0;
@@ -139,14 +148,26 @@ body {
   width: 0;
   height: 3px;
 }
+.underline-social {
+  bottom: 2px;
+  left: auto;
+  right: 0;
+  height: 2px;
+}
 
-.overline {
+.overline, .overline-social {
   position: absolute;
   top: 4%;
   left: 0;
   background-color: var(--bg_hc);
   width: 0;
   height: 3px;
+}
+.overline-social {
+  top: 2px;
+  left: auto;
+  right: 0;
+  height: 2px;
 }
 
 .nav_logo {
