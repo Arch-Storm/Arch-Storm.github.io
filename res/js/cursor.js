@@ -1,5 +1,3 @@
-import init_cursor from './index.js'
-
 // Gets the mouse position
 const getMousePos = e => {
     return {
@@ -30,18 +28,17 @@ export default class Cursor {
             y: {previous: 0, current: 0, amt: _amt}
         };
 
-        this.onMouseMoveEv = () => {
-            this.cursorConfigs.x.previous = this.cursorConfigs.x.current = mouse.x;
-            this.cursorConfigs.y.previous = this.cursorConfigs.y.current = mouse.y;
+        this.cursorConfigs.x.previous = this.cursorConfigs.x.current = mouse.x;
+        this.cursorConfigs.y.previous = this.cursorConfigs.y.current = mouse.y;
 
-            init_cursor();
+        console.log("test");
 
-            //    requestAnimationFrame
-            requestAnimationFrame(() => this.render())
+        //    requestAnimationFrame
+        requestAnimationFrame(() => this.render())
 
-            //    Cleanup function (Removing after one cycle complete)
-            window.removeEventListener('mousemove', this.onMouseMoveEv)
-        }
+        //    Cleanup function (Removing after one cycle complete)
+        window.removeEventListener('mousemove', this.onMouseMoveEv)
+
         //    Assign the mouse function
         window.addEventListener('mousemove', this.onMouseMoveEv)
     }

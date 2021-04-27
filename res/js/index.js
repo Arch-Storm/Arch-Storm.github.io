@@ -50,6 +50,7 @@ function morphPage() {
 function cursor() {
     const cursor = new Cursor(document.querySelector('.cursor')), follow = new Cursor(document.querySelector('.follow'))
     const cursorBefore = CSSRulePlugin.getRule(".cursor:before"), followBefore = CSSRulePlugin.getRule(".follow:before");
+    init_cursor();
 
     $("a")
         .on("mouseenter", function() {
@@ -117,5 +118,3 @@ function init_cursor() {
         scale: (.9),
     })
 }
-
-export default init_cursor;
