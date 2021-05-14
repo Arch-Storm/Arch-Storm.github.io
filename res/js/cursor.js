@@ -18,9 +18,9 @@ export default class Cursor {
         this.Cursor = el;
 
         if (this.Cursor.classList.contains("cursor")) {
-            _amt = .5;
+            _amt = .65;
         } else if (this.Cursor.classList.contains("follow")) {
-            _amt = .15;
+            _amt = .20;
         }
 
         this.cursorConfigs = {
@@ -31,7 +31,14 @@ export default class Cursor {
         this.cursorConfigs.x.previous = this.cursorConfigs.x.current = mouse.x;
         this.cursorConfigs.y.previous = this.cursorConfigs.y.current = mouse.y;
 
-        console.log("test");
+        gsap.to(".cursor > .before", {
+            duration: 1, ease: 'Power3.easeInOut',
+            scale: (.2),
+        })
+        gsap.to(".follow > .before", {
+            duration: 1, ease: 'Power3.easeInOut',
+            scale: (.9),
+        })
 
         //    requestAnimationFrame
         requestAnimationFrame(() => this.render())

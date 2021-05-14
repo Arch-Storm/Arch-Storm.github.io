@@ -15,5 +15,6 @@
     <orderEntry type="library" name="gsap" level="application" />
     <orderEntry type="library" name="pixi.js" level="application" />
     <orderEntry type="library" name="warpjs" level="application" />
+    <orderEntry type="library" name="visibilityjs" level="application" />
   </component>
 </module>

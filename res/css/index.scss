@@ -12,6 +12,7 @@ html {
     background-color: var(--bg);
     scroll-snap-type: y mandatory;
     overflow-x: hidden;
+    font-family: 'Work Sans', sans-serif;
 }
 
 *, *:before, *:after {
@@ -25,6 +26,37 @@ body {
     background-color: var(--bg);
 }
 
+.loader {
+    position: absolute;
+    z-index: 4;
+    top: 75%; bottom: 0; left: 0; right: 0;
+    height: 25%; width: 100%;
+    .load_button {
+        display: flex;
+        justify-content: center;
+        font-weight: 700;
+        letter-spacing: -.15rem;
+        text-transform: uppercase;
+        opacity: 0;
+    }
+    .sound_info {
+        font-size: 20px;
+        text-align: center;
+        color: var(--fg);
+        margin-top: 2%;
+        margin-bottom: 2.5%;
+        letter-spacing: .1rem;
+        text-transform: uppercase;
+        opacity: 0;
+    }
+}
+
+.sound_up {
+    display: block;
+    margin: auto;
+    opacity: 0;
+}
+
 .cursor {
     position: fixed;
     top: 0;
@@ -33,8 +65,7 @@ body {
     contain: layout style size;
     pointer-events: none;
     mix-blend-mode: difference;
-    &:before {
-        content: "";
+    .before {
         position: absolute;
         top: -24px;
         left: -24px;
@@ -55,8 +86,7 @@ body {
     contain: layout style size;
     pointer-events: none;
     mix-blend-mode: difference;
-    &:before{
-        content: "";
+    .before{
         position: absolute;
         top: -24px;
         left: -24px;
@@ -87,17 +117,23 @@ body {
     }
 }
 
-.img_container {
+#carousel {
     position: fixed;
+    width: 80%; height: 100%;
+    left: 15%;
+    overflow: hidden;
+}
+
+.item {
+    position: absolute;
     background: transparent;
     width: 100%; height: 100%;
     z-index: 1;
 }
 
-.profile_img {
-    position: fixed;
-    bottom: 0; left: -600px;
-    transform: translateX(0%) translateY(0%) rotateY(5deg) rotateX(35deg) rotate(-10deg) scale(1);
+.art {
+    position: absolute;
+    bottom: 0; left: -50%;
 }
 
 .social {
@@ -142,7 +178,7 @@ body {
 .underline {
     position: absolute;
     bottom: 4%; left: 0;
-    background-color: var(--bg_hc);
+    background-color: #000;
     width: 0; height: 3px;
     &-social {
         @extend .underline;
@@ -154,7 +190,7 @@ body {
 .overline {
     position: absolute;
     top: 4%; left: 0;
-    background-color: var(--bg_hc);
+    background-color: #000;
     width: 0; height: 3px;
     &-social {
         @extend .overline;
@@ -175,8 +211,19 @@ body {
     width: 50vw; height: 30vh;
     transform: translate(-50%, -50%);
     color: var(--fg);
-    font-family: 'Playfair Display', serif;
-    font-weight: 500;
-    font-size: 8em;
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 6vw;
     text-align: left;
+}
+
+.mute {
+    display: none;
+    position: fixed;
+    z-index: 3;
+    bottom: 3vh; left: 3vh;
+    opacity: 0;
+    .v1 {
+        transform: scale(1);
+    }
 }
