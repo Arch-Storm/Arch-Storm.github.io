@@ -99,9 +99,9 @@ function morphPage() {
                     .to(".mute", { opacity: 1, duration: .6 }, "<")*/
                     .to(".nav_link", { left: "7.5%", duration: .6, ease: "Power3.out" }, "1.2" )
                     .to(".art", {
-                        left: "50%", top: "50%", "transform": "translate(-50%, -50%)",
-                        duration: 1.2
-                    }, "+=.5" )
+                        right: "10%", top: "50%", "transform": "translate(0%, -50%)",
+                        duration: 1.6
+                    }, "+=.2" )
             }
         })
     }})

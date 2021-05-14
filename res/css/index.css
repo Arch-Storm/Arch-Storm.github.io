@@ -137,8 +137,13 @@ body {
 
 .art {
   position: absolute;
-  bottom: 0;
-  left: -50%;
+  top: 100%;
+  right: 0;
+  transform: translate(100%, -100%);
+  max-width: 75%;
+  max-height: 75%;
+  width: auto;
+  height: auto;
 }
 
 .social {
