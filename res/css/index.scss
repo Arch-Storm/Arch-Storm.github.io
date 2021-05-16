@@ -3,6 +3,7 @@
     --bg_hc: #2a2a51;
     --fg: #e4e4d4;
     --fg_hc: #fafaef;
+    --contrast: #f78c6c;
 }
 
 html {
@@ -11,7 +12,7 @@ html {
     padding: 0;
     background-color: var(--bg);
     scroll-snap-type: y mandatory;
-    overflow-x: hidden;
+    overflow: hidden;
     font-family: 'Work Sans', sans-serif;
 }
 
@@ -118,25 +119,83 @@ body {
 }
 
 #carousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: fixed;
-    width: 80%; height: 100%;
-    left: 15%;
+    width: 70%; height: 80%;
+    left: 20%; top: 10%;
     overflow: hidden;
 }
 
-.item {
-    position: absolute;
-    background: transparent;
-    width: 100%; height: 100%;
-    z-index: 1;
+.slider {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.slider_main {
+    display: flex;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: column;
+    .tl_item {
+        width: 5px;
+        background-color: var(--fg);
+        height: 0; // animated to 10vh
+        &.active {
+            background-color: var(--contrast);
+        }
+    }
+}
+
+.info {
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--fg);
+    opacity: 0; // animated
+    .number {
+        color: var(--contrast);
+        font-size: 1.5rem;
+    }
+    .name {
+        font-size: 5rem;
+        margin-left: .6rem;
+    }
+    .sub {
+        font-size: 2rem;
+    }
+    .date {
+        font-size: 2.5rem;
+        margin-top: 2rem;
+    }
+}
+
+.next_button {
+    margin-top: 15px;
+    opacity: 0; // animated
+    .name {
+        color: var(--fg);
+        font-size: 1.5rem;
+    }
+}
+
+.img_container {
+    width: 50%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .art {
     position: absolute;
-    top: 100%; right: 0;
-    transform: translate(100%, -100%);
-    max-width: 75%; max-height: 75%;
+    max-width: 100%; max-height: 100%;
     width: auto; height: auto;
+    opacity: 0; // animated
 }
 
 .social {

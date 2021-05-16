@@ -1,7 +1,8 @@
 import Cursor from "./cursor.js";
 
 gsap.defaults({
-    ease: "Power3.inOut"
+    ease: "Power3.inOut",
+    duration: ".6s"
 })
 
 /* ---------- Declaring Vars ------------------------------------------ */
@@ -98,10 +99,7 @@ function morphPage() {
                     /*.set(".mute", { display: "block" }, "<")
                     .to(".mute", { opacity: 1, duration: .6 }, "<")*/
                     .to(".nav_link", { left: "7.5%", duration: .6, ease: "Power3.out" }, "1.2" )
-                    .to(".art", {
-                        right: "10%", top: "50%", "transform": "translate(0%, -50%)",
-                        duration: 1.6
-                    }, "+=.2" )
+                showContent();
             }
         })
     }})
@@ -147,6 +145,11 @@ function cursor() {
             gsap.to(".social-icon", { filter: "invert(7%) sepia(17%)", duration: .3 })
             gsap.to([".underline-social", ".overline-social"], { width: "0", duration: .3, ease: "Power3.in" });
         })
+}
+
+function showContent() {
+    let tl = gsap.timeline({ delay: "2.4" }); tl
+        .to(".tl_item", .6, { height: "10vh" })
 }
 
 
