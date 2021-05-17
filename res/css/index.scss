@@ -15,7 +15,7 @@ html {
     overflow: hidden;
     font-family: 'Work Sans', sans-serif;
 }
-/*test*/
+
 *, *:before, *:after {
     box-sizing: inherit;
     margin: inherit;
@@ -172,6 +172,14 @@ body {
     .date {
         font-size: 2.5rem;
         margin-top: 2rem;
+    }
+}
+
+.name, .number, .sub, .date {
+    overflow: hidden;
+    p {
+        position: relative;
+        top: 100%;
     }
 }
 

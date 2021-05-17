@@ -16,7 +16,6 @@ html {
   font-family: "Work Sans", sans-serif;
 }
 
-/*test*/
 *, *:before, *:after {
   box-sizing: inherit;
   margin: inherit;
@@ -178,6 +177,14 @@ body {
 .info .date {
   font-size: 2.5rem;
   margin-top: 2rem;
+}
+
+.name, .number, .sub, .date {
+  overflow: hidden;
+}
+.name p, .number p, .sub p, .date p {
+  position: relative;
+  top: 100%;
 }
 
 .next_button {

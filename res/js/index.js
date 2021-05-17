@@ -83,7 +83,7 @@ function morphPage() {
             showCursor: false,
             startDelay: 500,
             onCharAppended: (self) => {
-                typeSound();
+                /*typeSound();*/
             },
             onComplete: (self) => {
                 $(".logo_mask").remove();
@@ -124,7 +124,7 @@ function cursor() {
             gsap.to([".underline", ".overline"], { width: "0", backgroundColor: "#000", duration: .3, ease: "Power3.in" });
         })
 
-    $(".social-entry, .load, .mute")
+    $(".social-entry, .load, .mute, .next_button")
         .on("mouseenter", function() {
             if (shouldScale) {
                 cursorScaleBigAlt()
@@ -145,11 +145,32 @@ function cursor() {
             gsap.to(".social-icon", { filter: "invert(7%) sepia(17%)", duration: .3 })
             gsap.to([".underline-social", ".overline-social"], { width: "0", duration: .3, ease: "Power3.in" });
         })
+
+    let element = $(".art");
+    let i = 0;
+
+    // HORRIBLE code follows
+    $(".next_button").on("click", function() {
+        if (i < element.length - 1) {
+            gsap.to(element[i], .6, { opacity: 0 });
+            gsap.to(".number p", .3, { opacity: 0, onComplete: function() { $(".number p").text("0" + (i + 1)); }});
+            i++;
+            gsap.to(element[i], .6, { opacity: 1 });
+            gsap.to(".number p", .3, { delay: .3, opacity: 1});
+        } else {
+            gsap.to(element[i], .6, { opacity: 0 });
+            i = 0;
+            gsap.to(".number p", .3, { opacity: 0, onComplete: function() { $(".number p").text("0" + (i + 1)); }});
+            gsap.to(".number p", .3, { delay: .3, opacity: 1});
+            gsap.to(element[i], .6, { opacity: 1 });
+        }
+    })
 }
 
 function showContent() {
-    let tl = gsap.timeline({ delay: "2.4" }); tl
+    let tl = gsap.timeline({ delay: "1.6" }); tl
         .to(".tl_item", .6, { height: "10vh" })
+    reveal();
 }
 
 
@@ -204,6 +225,13 @@ function cursorScaleHide() {
     shouldScale = false;
 }
 
+function reveal() {
+    let tl = gsap.timeline({ delay: "2.2" }); tl
+        .to(".info p", .6, { top: "0" })
+        .to(".info, .next_button", .6, { opacity: 1 }, "<")
+        .to(".art.first", .6, { opacity: 1 })
+}
+
 /*
 function pauseMusic() {
     isPaused = true
@@ -230,3 +258,4 @@ function playMusic() {
     gsap.to(".v2", { transform: "scale(1) translateX(0)", duration: .3, delay: .1 })
     gsap.to(".v1", { transform: "scale(1) translateX(0)", duration: .3, delay: .2 })
 }*/
+
