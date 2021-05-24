@@ -13,7 +13,7 @@ html {
   background-color: var(--bg);
   scroll-snap-type: y mandatory;
   overflow: hidden;
-  font-family: "Work Sans", sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 *, *:before, *:after {
@@ -166,21 +166,35 @@ body {
 .info .number {
   color: var(--contrast);
   font-size: 1.5rem;
+  position: relative;
 }
 .info .name {
   font-size: 5rem;
-  margin-left: 0.6rem;
+  position: relative;
 }
 .info .sub {
   font-size: 2rem;
+  position: relative;
 }
 .info .date {
   font-size: 2.5rem;
   margin-top: 2rem;
+  position: relative;
+}
+.info .span_bg {
+  display: block;
+  width: 15vw;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: left;
+  transform: scaleX(0);
+  background-color: var(--fg);
 }
 
 .name, .number, .sub, .date {
-  overflow: hidden;
+  overflow: visible;
 }
 .name p, .number p, .sub p, .date p {
   position: relative;
@@ -191,9 +205,14 @@ body {
   margin-top: 15px;
   opacity: 0;
 }
+.next_button .next_text {
+  color: var(--fg);
+  font-size: 1rem;
+}
 .next_button .name {
   color: var(--fg);
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  margin-top: 0;
 }
 
 .img_container {
@@ -206,8 +225,9 @@ body {
 
 .art {
   position: absolute;
-  max-width: 100%;
+  max-width: 68%;
   max-height: 100%;
+  right: 0;
   width: auto;
   height: auto;
   opacity: 0;

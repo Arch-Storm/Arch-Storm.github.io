@@ -13,7 +13,7 @@ html {
     background-color: var(--bg);
     scroll-snap-type: y mandatory;
     overflow: hidden;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
 *, *:before, *:after {
@@ -161,17 +161,29 @@ body {
     .number {
         color: var(--contrast);
         font-size: 1.5rem;
+        position: relative;
     }
     .name {
         font-size: 5rem;
-        margin-left: .6rem;
+        position: relative;
     }
     .sub {
         font-size: 2rem;
+        position: relative;
     }
     .date {
         font-size: 2.5rem;
         margin-top: 2rem;
+        position: relative;
+    }
+    .span_bg {
+        display: block;
+        width: 100%; height: 100%;
+        position: absolute;
+        left: 0; top: 0;
+        transform-origin: left;
+        transform: scaleX(0);
+        background-color: var(--fg);
     }
 }
 
@@ -186,9 +198,15 @@ body {
 .next_button {
     margin-top: 15px;
     opacity: 0; // animated
+    .next_text {
+        color: var(--fg);
+        font-size: 1rem;
+
+    }
     .name {
         color: var(--fg);
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        margin-top: 0;
     }
 }
 
@@ -201,7 +219,8 @@ body {
 
 .art {
     position: absolute;
-    max-width: 100%; max-height: 100%;
+    max-width: 70%; max-height: 100%;
+    right: 0;
     width: auto; height: auto;
     opacity: 0; // animated
 }

@@ -6,20 +6,30 @@ gsap.defaults({
 })
 
 /* ---------- Declaring Vars ------------------------------------------ */
+
+const names = ["Bahamas", "Skull", "Bvlgari", "Sword", "Dagger", "Discord", "Hoodie", "House", "Assets", "Keyboard", "Room", "Signature"];
+const subs = ["School Project", "Personal", "School Project", "Personal", "Personal", "Open-Source Theme", "School Project", "Personal", "Everything used", "All functional", "Planning", "Currently in use"];
+const dates = ["~ 2019", "~ 2018", "~ 2018", "~ 2017", "~ 2017", "~ 2021", "~ 2019", "~ 2020", "", "~ 2020", "~ 2020", "~ 2021"];
+
 const docStyle = getComputedStyle(document.documentElement);
-let bg, fg, bg_hc, fg_hc, id, muted = false, isPaused = false;
+let bg, fg, bg_hc, fg_hc, contrast; //, id, muted = false, isPaused = false;
 let shouldScale = true;
 
-const player = document.getElementById("player");
+/* const player = document.getElementById("player");
 const p = $("#player");
-/*player.volume = .2;*/
+player.volume = .2; */
 
 /* --------------------- Main Function -------------------------------- */
 $(document).ready(function() {
-    bg = getProp("--bg"); fg = getProp("--fg"); bg_hc = getProp("--bg_hc"); fg_hc = getProp("--fg_hc");
+    bg = getProp("--bg"); fg = getProp("--fg"); bg_hc = getProp("--bg_hc"); fg_hc = getProp("--fg_hc"); contrast = getProp("--contrast");
+
+    let element = $(".art");
+    let i = 0;
+    let tls;
 
     initPage()
 
+    /*
     $(".mute")
         .on("click", function() {
             p.stop()
@@ -29,6 +39,7 @@ $(document).ready(function() {
                 pauseMusic()
             }
         })
+     */
 
     $(".load")
         .on("mouseenter mouseleave", function() { tl.reversed(!tl.reversed()) })
@@ -38,16 +49,28 @@ $(document).ready(function() {
         .to(document.querySelector(".load").children[0], 0.4, {attr: {width:160}, opacity: 1, ease: "Power4.inOut" })
         .to(".load text", 0.6, { x: "+=160", y: "+=10", ease: "back.inOut(1)" }, 0)
         .reversed(true)
-});
 
 
-/* ----------- Functions called from $(document).ready() ---------------- */
+
+/* ----------- Functions called from $(document).ready() -------------- */
 function initPage() {
     gsap.to(".nav_link", { opacity: 1, duration: 1, delay: .1 })
     gsap.to(".nav_link", { top: "30%", width: "480px", height: "480px", duration: 1.2, delay: 1.1 , onComplete: function() { cursor() }})
-/*    gsap.to(".sound_up", { y: "-=20", opacity: 1, duration: 1, delay: 2})
-    gsap.to(".sound_info", { y: "-=20", opacity: 1, duration: 1, delay: 2.3 })*/
+/*  gsap.to(".sound_up", { y: "-=20", opacity: 1, duration: 1, delay: 2})
+    gsap.to(".sound_info", { y: "-=20", opacity: 1, duration: 1, delay: 2.3 })  */
     gsap.to(".load_button", { y: "-=20", opacity: 1, duration: 1, delay: 2.6 })
+
+    $(".number p").text("01");
+    $(".info .name p").text(names[0]);
+    $(".next_info .name").text(names[1]);
+    $(".sub p").text(subs[0]);
+    $(".date p").text(dates[0]);
+    let els = element.length;
+    for  (let i = 0; i < els; i++) {
+        $(".timeline").append($("<div/>", { "class": "tl_item" }));
+    }
+    $(".tl_item").eq(0).addClass("active");
+    tls = document.querySelectorAll(".tl_item");
 
 /*    Visibility.change(function(e, state) {
         if (state === 'hidden') {
@@ -145,36 +168,80 @@ function cursor() {
             gsap.to(".social-icon", { filter: "invert(7%) sepia(17%)", duration: .3 })
             gsap.to([".underline-social", ".overline-social"], { width: "0", duration: .3, ease: "Power3.in" });
         })
-
-    let element = $(".art");
-    let i = 0;
-
-    // HORRIBLE code follows
-    $(".next_button").on("click", function() {
-        if (i < element.length - 1) {
-            gsap.to(element[i], .6, { opacity: 0 });
-            gsap.to(".number p", .3, { opacity: 0, onComplete: function() { $(".number p").text("0" + (i + 1)); }});
-            i++;
-            gsap.to(element[i], .6, { opacity: 1 });
-            gsap.to(".number p", .3, { delay: .3, opacity: 1});
-        } else {
-            gsap.to(element[i], .6, { opacity: 0 });
-            i = 0;
-            gsap.to(".number p", .3, { opacity: 0, onComplete: function() { $(".number p").text("0" + (i + 1)); }});
-            gsap.to(".number p", .3, { delay: .3, opacity: 1});
-            gsap.to(element[i], .6, { opacity: 1 });
-        }
-    })
 }
 
 function showContent() {
     let tl = gsap.timeline({ delay: "1.6" }); tl
-        .to(".tl_item", .6, { height: "10vh" })
+        .to(".tl_item", .6, { height: "5vh" })
     reveal();
 }
 
 
-/* ----------------- Functions called when needed --------------------------- */
+/* ----------------- Functions called when needed --------------------- */
+
+function slide(r) {
+    if (r) {
+        if (i > 0) {
+            gsap.to(element[i], .6, { opacity: 0 });
+            gsap.to(tls[i], .3, { backgroundColor: fg });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { opacity: 0, onComplete: function() {
+                    $(".number p").text("0" + (i + 1));
+                    $(".info .name p").text(names[i]);
+                    $(".next_info .name").text(names[i + 1]);
+                    $(".sub p").text(subs[i]);
+                    $(".date p").text(dates[i]);
+                }});
+            i--;
+            gsap.to(tls[i], .3, { backgroundColor: contrast });
+            gsap.to(element[i], .6, { opacity: 1 });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { delay: .3, opacity: 1});
+        } else {
+            gsap.to(element[i], .6, { opacity: 0 });
+            gsap.to(tls[i], .3, { backgroundColor: fg });
+            i = element.length - 1;
+            gsap.to(tls[i], .3, { backgroundColor: contrast });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { opacity: 0, onComplete: function() {
+                    $(".number p").text("0" + (i + 1));
+                    $(".info .name p").text(names[i]);
+                    $(".next_info .name").text(names[0]);
+                    $(".sub p").text(subs[i]);
+                    $(".date p").text(dates[i]);
+                }});
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { delay: .3, opacity: 1});
+            gsap.to(element[i], .6, { opacity: 1 });
+        }
+    } else if (!r) {
+        if (i < element.length - 1) {
+            gsap.to(element[i], .6, { opacity: 0 });
+            gsap.to(tls[i], .3, { backgroundColor: fg });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { opacity: 0, onComplete: function() {
+                    $(".number p").text("0" + (i + 1));
+                    $(".info .name p").text(names[i]);
+                    $(".next_info .name").text(names[i + 1]);
+                    $(".sub p").text(subs[i]);
+                    $(".date p").text(dates[i]);
+                }});
+            i++;
+            gsap.to(tls[i], .3, { backgroundColor: contrast });
+            gsap.to(element[i], .6, { opacity: 1 });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { delay: .3, opacity: 1});
+        } else {
+            gsap.to(element[i], .6, { opacity: 0 });
+            gsap.to(tls[i], .3, { backgroundColor: fg });
+            i = 0;
+            gsap.to(tls[i], .3, { backgroundColor: contrast });
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { opacity: 0, onComplete: function() {
+                    $(".number p").text("0" + (i + 1));
+                    $(".info .name p").text(names[i]);
+                    $(".next_info .name").text(names[i + 1]);
+                    $(".sub p").text(subs[i]);
+                    $(".date p").text(dates[i]);
+                }});
+            gsap.to(".number p, .info .name p, .next_info .name, .sub p, .date p", .3, { delay: .3, opacity: 1});
+            gsap.to(element[i], .6, { opacity: 1 });
+        }
+    }
+}
 
 function typeSound() {
     const selector = (Math.floor(Math.random() * 5) + 1).toString();
@@ -230,6 +297,16 @@ function reveal() {
         .to(".info p", .6, { top: "0" })
         .to(".info, .next_button", .6, { opacity: 1 }, "<")
         .to(".art.first", .6, { opacity: 1 })
+    let indicator = new WheelIndicator({
+        callback: function(e) {
+            if (e.direction === 'down') {
+                slide(false);
+            } else if (e.direction === 'up') {
+                slide(true);
+            }
+        }
+    });
+    indicator.getOption("preventMouse");
 }
 
 /*
@@ -258,4 +335,6 @@ function playMusic() {
     gsap.to(".v2", { transform: "scale(1) translateX(0)", duration: .3, delay: .1 })
     gsap.to(".v1", { transform: "scale(1) translateX(0)", duration: .3, delay: .2 })
 }*/
+
+});
 
